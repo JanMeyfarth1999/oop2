@@ -4,7 +4,44 @@ class Triangle {
   double width;
   double height;
 
-  Triangle(this.width, this.height, MeasurementSystem system) {
+  Triangle._internal(this.width, this.height);
+
+  Triangle(double width, double height, MeasurementSystem system)
+    : this._internal(_convertToMm(width, system), _convertToMm(height, system));
+
+  Triangle.mm(double width, double height) : this._internal(width, height);
+
+  Triangle.cm(double width, double height)
+    : this._internal(
+        _convertToMm(width, MeasurementSystem.cm),
+        _convertToMm(height, MeasurementSystem.cm),
+      );
+
+  Triangle.dm(double width, double height)
+    : this._internal(
+        _convertToMm(width, MeasurementSystem.dm),
+        _convertToMm(height, MeasurementSystem.dm),
+      );
+
+  Triangle.m(double width, double height)
+    : this._internal(
+        _convertToMm(width, MeasurementSystem.m),
+        _convertToMm(height, MeasurementSystem.m),
+      );
+
+  Triangle.inch(double width, double height)
+    : this._internal(
+        _convertToMm(width, MeasurementSystem.inch),
+        _convertToMm(height, MeasurementSystem.inch),
+      );
+
+  Triangle.feet(double width, double height)
+    : this._internal(
+        _convertToMm(width, MeasurementSystem.feet),
+        _convertToMm(height, MeasurementSystem.feet),
+      );
+
+  static double _convertToMm(double value, MeasurementSystem system) {
     double factor = 1;
 
     switch (system) {
@@ -32,7 +69,10 @@ class Triangle {
         factor = 304.8;
         break;
     }
-    width = width * factor;
-    height = height * factor;
+    return value * factor;
+  }
+
+  double area() {
+    return width * height / 2;
   }
 }
