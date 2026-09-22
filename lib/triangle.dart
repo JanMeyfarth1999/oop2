@@ -1,4 +1,4 @@
-enum MeasurementSystem { mm, cm, dm, m, inch, feet }
+import 'measurement_system.dart';
 
 class Triangle {
   double width;
@@ -70,9 +70,5 @@ class Triangle {
         break;
     }
     return value * factor;
-  }
-
-  double area() {
-    return width * height / 2;
   }
 }
